@@ -15,11 +15,11 @@ function getComputerChoice() {
     otherwise return Scissors
     */
     if (rand === 1) {
-        return "Rock"
+        return "rock"
     } else if (rand === 2) {
-        return "Paper"
+        return "paper"
     } else {
-        return "Scissors"
+        return "scissors"
     }
 }
 
@@ -29,11 +29,11 @@ function getComputerChoice() {
 // use toLowerCase() to make case-insensitive
 function playRound(playerSelection, computerSelection) {
     // if player equals the computer, the return "it's a tie!"
-    if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+    if (playerSelection.toLowerCase() === computerSelection) {
         return `Player chose ${playerSelection} and Computer chose ${computerSelection}. It's a Tie!`
     } else if (playerSelection.toLowerCase() === "rock") {  // else if player equals rock
         // if computer equals paper, return "Player Lost! Paper beats Rock"
-        if (computerSelection.toLowerCase() === "paper") {
+        if (computerSelection === "paper") {
             computerWins++
             return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Paper covers Rock`
         } else { // otherwise return "Player Won! Rock beats Scissors"
@@ -41,7 +41,7 @@ function playRound(playerSelection, computerSelection) {
             return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Won! Rock beats Scissors`
         }
     } else if (playerSelection.toLowerCase() === "paper") { // same as before
-        if (computerSelection.toLowerCase() === "rock") {
+        if (computerSelection === "rock") {
             playerWins++
             return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Won! Paper covers Rock`
         } else {
@@ -49,7 +49,7 @@ function playRound(playerSelection, computerSelection) {
             return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Scissors cuts Paper`
         }
     } else if (playerSelection.toLowerCase() === "scissors") { // same as before
-        if (computerSelection.toLowerCase() === "rock") {
+        if (computerSelection === "rock") {
             computerWins++
             return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Rock beats Scissors`
         } else {
