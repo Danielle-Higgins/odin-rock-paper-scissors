@@ -63,27 +63,26 @@ function playRound(playerSelection, computerSelection) {
 // const computerSelection = getComputerChoice()
 // console.log(playRound(playerSelection, computerSelection))
 
-// plays 5 round game
+// whoever is first to 5 points wins the game
 function game() {
-    // loop through the game 5 times
-    for(let i = 1; i <= 5; i++) {
-
+    while(playerWins !== 5 && computerWins !== 5) {
         let user = prompt("Chose Rock, Paper, or Scissors")
-
+        
         if (user === null) {
             console.log(`Canceling Game!`)
             return
         }
+
         // call the playRound function
         console.log(playRound(user, getComputerChoice()))
     }
 
     console.log(`Player Score: ${playerWins} \t Computer Score: ${computerWins}`)
 
-    if (playerWins > computerWins) {
-        console.log(`Player Wins! Player has the Highest Score!`)
-    } else if (computerWins > playerWins) {
-        console.log(`Computer Wins! Computer has the Highest Score!`)
+    if (playerWins === 5) {
+        console.log(`Player Wins!`)
+    } else if (computerWins === 5) {
+        console.log(`Computer Wins!`)
     } else {
         console.log(`No One Wins! It's a Tie!`)
     }
