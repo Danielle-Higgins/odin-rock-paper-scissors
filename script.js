@@ -72,6 +72,8 @@ function game() {
         if (user === null) {
             console.log(`Canceling Game!`)
             return
+        } else if (user === "") {
+            continue
         }
 
         // call the playRound function
