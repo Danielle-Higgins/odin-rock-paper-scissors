@@ -65,6 +65,7 @@ function playRound(playerSelection, computerSelection) {
 
 // whoever is first to 5 points wins the game
 function game() {
+    console.log("First to 5 points wins the game!")
     while(playerWins !== 5 && computerWins !== 5) {
         let user = prompt("Chose Rock, Paper, or Scissors")
         
