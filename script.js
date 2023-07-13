@@ -82,10 +82,8 @@ function game() {
 
     if (playerWins === 5) {
         console.log(`Player Wins!`)
-    } else if (computerWins === 5) {
-        console.log(`Computer Wins!`)
     } else {
-        console.log(`No One Wins! It's a Tie!`)
+        console.log(`Computer Wins!`)
     }
 }
 
