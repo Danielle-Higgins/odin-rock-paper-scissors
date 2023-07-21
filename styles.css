@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles for the header */
+.header {
+    /* border: 2px solid black; */
+    font-family: "Press Start 2P";
+    min-height: 120px;
+    color: #9ccddc;
+    background-color: #062c43;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
