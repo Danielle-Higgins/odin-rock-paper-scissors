@@ -1,10 +1,14 @@
-// create variable to keep track of how many times player won
-let playerWins = 0
+const buttons = document.querySelectorAll("button")
+const para1 = document.querySelector(".question")
+const para2 = document.querySelector(".rules")
+const player = document.querySelector(".player")
+const computer = document.querySelector(".computer")
+const mark1 = document.querySelector("#mark-1")
+const mark2 = document.querySelector("#mark-2")
 
-// create variable to keep track of how many times computer won
+let playerWins = 0
 let computerWins = 0
 
-// make computer play
 function getComputerChoice() {
     // generate a random number between 1-3 and assign Rock, Paper, Scissors to them
     let rand = Math.floor(Math.random() * 3) + 1
@@ -15,78 +19,96 @@ function getComputerChoice() {
     otherwise return Scissors
     */
     if (rand === 1) {
+        // setting the emoji for the computer
+        mark2.textContent = "✊"
         return "rock"
     } else if (rand === 2) {
+        mark2.textContent = "🖐️"
         return "paper"
     } else {
+        mark2.textContent = "✌️"
         return "scissors"
     }
 }
 
-//console.log(getComputerChoice())
-
 // plays a single round
-// use toLowerCase() to make case-insensitive
 function playRound(playerSelection, computerSelection) {
     // if player equals the computer, the return "it's a tie!"
-    if (playerSelection.toLowerCase() === computerSelection) {
-        return `Player chose ${playerSelection} and Computer chose ${computerSelection}. It's a Tie!`
-    } else if (playerSelection.toLowerCase() === "rock") {  // else if player equals rock
+    if (playerSelection === computerSelection) {
+        return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nIt's a Tie!`
+    } else if (playerSelection === "rock") {  // else if player equals rock
         // if computer equals paper, return "Player Lost! Paper beats Rock"
         if (computerSelection === "paper") {
             computerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Paper covers Rock`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Lost! Paper covers Rock`
         } else { // otherwise return "Player Won! Rock beats Scissors"
             playerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Won! Rock beats Scissors`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Won! Rock beats Scissors`
         }
-    } else if (playerSelection.toLowerCase() === "paper") { // same as before
+    } else if (playerSelection === "paper") { // same as before
         if (computerSelection === "rock") {
             playerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Won! Paper covers Rock`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Won! Paper covers Rock`
         } else {
             computerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Scissors cuts Paper`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Lost! Scissors cuts Paper`
         }
-    } else if (playerSelection.toLowerCase() === "scissors") { // same as before
+    } else if (playerSelection === "scissors") { // same as before
         if (computerSelection === "rock") {
             computerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Lost! Rock beats Scissors`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Lost! Rock beats Scissors`
         } else {
             playerWins++
-            return `Player chose ${playerSelection} and Computer chose ${computerSelection}. Player Won! Scissors cuts Paper`
+            return `You chose ${playerSelection} and Computer chose ${computerSelection}. \nYou Won! Scissors cuts Paper`
         }
     }
 }
 
-// const playerSelection = "rock"
-// const computerSelection = getComputerChoice()
-// console.log(playRound(playerSelection, computerSelection))
+buttons.forEach(button => {
 
-// whoever is first to 5 points wins the game
-function game() {
-    console.log("First to 5 points wins the game!")
-    while(playerWins !== 5 && computerWins !== 5) {
-        let user = prompt("Chose Rock, Paper, or Scissors")
-        
-        if (user === null) {
-            console.log(`Canceling Game!`)
-            return
-        } else if (user === "") {
-            continue
+    // loop through each button
+    button.addEventListener("click", (e) => {
+        //console.log(e.target.textContent)
+
+        if (e.target.textContent === "✊") {
+            e.target.value = "rock"
+        } else if (e.target.textContent === "🖐️") {
+            e.target.value = "paper"
+        } else {
+            e.target.value = "scissors"
+        }
+        //console.log(e.target.value)
+
+        // call playRound function and split return value by newline character, returns array
+        let round = playRound(e.target.value, getComputerChoice()).split("\n")
+        //console.log(round)
+
+        // loop through array and assign text content of the paragraphs
+        for (let i = 0; i < round.length; i++) {
+            para1.textContent = round[1]
+            para2.textContent = round[0]
         }
 
-        // call the playRound function
-        console.log(playRound(user, getComputerChoice()))
-    }
+        // setting the emoji for the player
+        mark1.textContent = e.target.textContent
 
-    console.log(`Player Score: ${playerWins} \t Computer Score: ${computerWins}`)
+        // show the scores
+        player.textContent = `Player Score: ${playerWins}`
+        computer.textContent = `Computer Score: ${computerWins}`
 
-    if (playerWins === 5) {
-        console.log(`Player Wins!`)
-    } else {
-        console.log(`Computer Wins!`)
-    }
-}
-
-//game()
+        // check for the winner
+        if (playerWins === 5) {
+            para1.textContent = "You Beat the Computer!"
+            para2.textContent = "Reload to Play Again!"
+            buttons[0].disabled = true
+            buttons[1].disabled = true
+            buttons[2].disabled = true
+        } else if (computerWins === 5) {
+            para1.textContent = "You Lost Against the Computer, Too Bad!"
+            para2.textContent = "Reload to Play Again!"
+            buttons[0].disabled = true
+            buttons[1].disabled = true
+            buttons[2].disabled = true
+        }
+    })
+})
