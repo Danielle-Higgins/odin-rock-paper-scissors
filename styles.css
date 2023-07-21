@@ -92,6 +92,11 @@ body {
     font-size: 70px;
     border: none;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #128cd3;
 }
 
 
