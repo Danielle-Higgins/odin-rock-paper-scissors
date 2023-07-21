@@ -100,12 +100,16 @@ buttons.forEach(button => {
         if (playerWins === 5) {
             para1.textContent = "You Beat the Computer!"
             para2.textContent = "Reload to Play Again!"
+
+            // disables the buttons
             buttons[0].disabled = true
             buttons[1].disabled = true
             buttons[2].disabled = true
         } else if (computerWins === 5) {
             para1.textContent = "You Lost Against the Computer, Too Bad!"
             para2.textContent = "Reload to Play Again!"
+
+            // disables the buttons
             buttons[0].disabled = true
             buttons[1].disabled = true
             buttons[2].disabled = true
